@@ -14,6 +14,7 @@ public class Service implements Serializable {
     private int status;
     private double latitude;
     private double longitude;
+    private Rate rate;
 
     public Service(Date serviceDate, int userId, int status, double latitude, double longitude) {
         this.serviceDate = serviceDate;
@@ -61,6 +62,14 @@ public class Service implements Serializable {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public Rate getRate() {
+        return rate;
+    }
+
+    public void setRate(Rate rate) {
+        this.rate = rate;
     }
 
     public static ArrayList<Service> getSampleData(){

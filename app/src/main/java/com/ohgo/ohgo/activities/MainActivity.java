@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity
         ServiceLocationFragment.OnFragmentInteractionListener
 {
     private FragmentManager fragmentManager;
+    private static Menu menu;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -89,10 +90,10 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        setRefreshActionButtonState(false);
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
+
             getMenuInflater().inflate(R.menu.main, menu);
             restoreActionBar();
             return true;
@@ -112,6 +113,8 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
 
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -127,6 +130,20 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void arriveToLocation(int status) {
 
+    }
+
+    public static void setRefreshActionButtonState(boolean refresh){
+        if(menu!=null){
+            MenuItem refreshItem = menu.findItem(R.id.menuRefresh);
+            if(refreshItem!=null){
+                if(refresh){
+                    refreshItem.setVisible(true);
+                    refreshItem.setActionView(R.layout.loading);
+                }else{
+                    refreshItem.setVisible(false);
+                }
+            }
+        }
     }
 
     /**
