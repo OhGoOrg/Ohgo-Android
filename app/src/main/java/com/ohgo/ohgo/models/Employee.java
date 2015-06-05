@@ -1,51 +1,57 @@
 package com.ohgo.ohgo.models;
 
+import com.parse.ParseClassName;
+
+import com.parse.ParseObject;
+
 /**
  * Created by Rick on 05/06/15.
  */
-public class Employee {
+
+@ParseClassName("Employee")
+public class Employee extends  ParseObject{
 
     private String name;
     private double latitude;
     private double longitude;
     private int customerId;
 
-    public Employee(String name, double latitude, double longitude, int customerId) {
+    public Employee(){}
+
+    public Employee(String name, double latitude, double longitude, int customerId)
+    {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
         this.customerId = customerId;
     }
 
-    public String getName() {
-        return name;
+    public String getName()
+    {
+        return getString("name");
+    }
+    public void setName(String value)
+    {
+        put("name", value);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public double getLatitude()
+    {
+        return getDouble("latitude");
     }
 
-    public double getLatitude() {
-        return latitude;
+    public void setLatitude(double value) {
+        put("latitude",value);
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public double getLongitude()
+    {
+        return getDouble("longitude");
     }
 
-    public double getLongitude() {
-        return longitude;
+    public void setLongitude(double value)
+    {
+        put("longitude",value);
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
 }

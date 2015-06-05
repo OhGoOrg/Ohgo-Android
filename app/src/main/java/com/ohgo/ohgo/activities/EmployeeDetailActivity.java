@@ -10,7 +10,9 @@ import android.view.MenuItem;
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.TripDetailFragment;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
+import com.parse.ParseObject;
 
 /**
  * Created by Ruben on 6/5/15.
@@ -21,15 +23,15 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
     Bundle employeeBundle;
     FragmentManager manager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         mapBundle = new Bundle();
-        employeeBundle = new Bundle(); employeeBundle.putString("name","OREO");
+        employeeBundle = new Bundle(); employeeBundle.putString("name", "OREO");
         setContentView(R.layout.activity_employee_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         //StartDetailsFragment();
         //StartListDetailFragment();
