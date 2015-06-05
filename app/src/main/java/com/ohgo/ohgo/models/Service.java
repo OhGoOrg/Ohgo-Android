@@ -63,17 +63,14 @@ public class Service implements Serializable {
         this.longitude = longitude;
     }
 
-    public static ArrayList<Service> getSampleData(){
-
+    public static ArrayList<Service> getSampleData()
+    {
         ArrayList<Service> services = new ArrayList<>();
         services.add(new Service(Calendar.getInstance().getTime(), 1,2,40.717626,-73.997534));
         services.add(new Service(Calendar.getInstance().getTime(), 2,1,35.689487, 139.691706));
         services.add(new Service(Calendar.getInstance().getTime(), 4,2,19.432608, -99.133208));
         services.add(new Service(Calendar.getInstance().getTime(), 4,3,37.774929, -122.419416));
         services.add(new Service(Calendar.getInstance().getTime(), 3,2,31.230416, 121.473701));
-
-
-
         return services;
     }
 }

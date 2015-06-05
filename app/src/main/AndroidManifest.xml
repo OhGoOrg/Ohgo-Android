@@ -44,15 +44,6 @@
         </activity>
         <service android:name="com.parse.PushService" />
         <receiver
-            android:name=".receiver.ParseCustomReceiver"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
-        <receiver
             android:name="com.parse.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
@@ -63,6 +54,10 @@
                 <category android:name="com.ohgo.ohgo" />
             </intent-filter>
         </receiver>
+        <activity
+            android:name=".activities.EmployeeDetailActivity"
+            android:label="@string/employee_detail_activity" >
+        </activity>
 
 
 

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:weightSum="2"
+              android:showDividers="beginning|middle|end"
+            android:id="@+id/grid_contain">
+
+    <fragment
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/map_detail"
+        tools:context="mx.example.ruben.stir.app.ui.fragments.MapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/employee_detail_trips">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/employee_details">
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/employee_detail_list">
+    </RelativeLayout>
+
+
+</RelativeLayout>
