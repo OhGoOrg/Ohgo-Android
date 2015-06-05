@@ -1,6 +1,7 @@
 package com.ohgo.ohgo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.ohgo.ohgo.R;
+import com.ohgo.ohgo.activities.EmployeeDetailActivity;
 import com.ohgo.ohgo.models.Service;
 
 import java.util.ArrayList;
@@ -41,6 +43,16 @@ public class WorkPlanAdapter extends ArrayAdapter{
             holder.statusColor = (FrameLayout) convertView.findViewById(R.id.statusColor);
             holder.txtUserName = (TextView) convertView.findViewById(R.id.txtUserName);
             holder.txtServiceDate = (TextView) convertView.findViewById(R.id.txtServiceDate);
+
+            holder.statusColor.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(context, EmployeeDetailActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
             convertView.setTag(holder);
         } else {

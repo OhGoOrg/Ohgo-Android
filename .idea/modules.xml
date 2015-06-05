@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OhGo.iml" filepath="$PROJECT_DIR$/OhGo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Ohgo-Android.iml" filepath="$PROJECT_DIR$/Ohgo-Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Parse-1.9.2/Parse-1.9.2.iml" filepath="$PROJECT_DIR$/Parse-1.9.2/Parse-1.9.2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bolts-android-1.2.0/bolts-android-1.2.0.iml" filepath="$PROJECT_DIR$/bolts-android-1.2.0/bolts-android-1.2.0.iml" />
     </modules>
   </component>
 </project>
-
