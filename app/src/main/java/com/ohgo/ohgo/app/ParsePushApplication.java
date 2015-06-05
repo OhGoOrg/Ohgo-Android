@@ -7,8 +7,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
+import com.ohgo.ohgo.activities.MainActivity;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.PushService;
+
 
 /**
  * Created by Ruben on 6/4/15.
@@ -34,7 +37,7 @@ public class ParsePushApplication extends Application {
     public void onCreate() {
         super.onCreate();
         Parse.initialize(this, "GbhsPA5Oh2yu2voFbxo45iJgFqPoJWd3kzZnqBZi", "diMBtwqe0Ysm0XXp2wb5fD5qpKusC1pkPeEgKDIQ");
-
+        PushService.setDefaultPushCallback(this, MainActivity.class);
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         // initialize the singleton

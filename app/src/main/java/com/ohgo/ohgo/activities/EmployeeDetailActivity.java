@@ -26,20 +26,26 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
     {
         super.onCreate(savedInstanceState);
         mapBundle = new Bundle();
-        employeeBundle = new Bundle();
+        employeeBundle = new Bundle(); employeeBundle.putString("name","OREO");
         setContentView(R.layout.activity_employee_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //StartDetailsFragment();
         //StartListDetailFragment();
         StartMapFragment();
-        //StartTripDetailsFragment();
+        StartTripDetailsFragment();
     }
 
     void StartMapFragment()
     {
         ServiceLocationFragment fragment = ServiceLocationFragment.newInstance(Service.getSampleData().get(0));
         getSupportFragmentManager().beginTransaction().replace(R.id.map_detail, fragment).commit();
+    }
+    void StartTripDetailsFragment()
+    {
+        Fragment fragment = TripDetailFragment.getInstance(employeeBundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_trips, fragment).commit();
     }
     /*
     void StartDetailsFragment()
@@ -55,11 +61,7 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
             getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_list, fragment).commit();
         }
         */
-    void StartTripDetailsFragment()
-    {
-        Fragment fragment = TripDetailFragment.getInstance(employeeBundle);
-        manager.beginTransaction().replace(R.id.employee_detail_trips, fragment).commit();
-    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

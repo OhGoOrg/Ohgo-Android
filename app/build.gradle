@@ -28,4 +28,5 @@ dependencies {
     compile 'me.neavo:volley:2014.12.09'
     compile project(':bolts-android-1.2.0')
     compile 'com.facebook.fresco:drawee:0.5.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

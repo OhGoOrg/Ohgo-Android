@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
@@ -43,6 +44,7 @@ public class MainActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();

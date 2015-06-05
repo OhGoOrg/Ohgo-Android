@@ -10,15 +10,12 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/img_detail_user"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center_vertical"
-        app:roundAsCircle="true"
-        fresco:actualImageScaleType="focusCrop"
-        fresco:placeholderImage="@mipmap/ic_launcher"
-        fresco:placeholderImageScaleType="focusCrop" />
+         />
 
 
     <TextView

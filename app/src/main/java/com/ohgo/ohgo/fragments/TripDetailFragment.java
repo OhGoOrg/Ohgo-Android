@@ -1,6 +1,7 @@
 package com.ohgo.ohgo.fragments;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -11,8 +12,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 
@@ -31,7 +34,7 @@ public class TripDetailFragment extends Fragment
     Bundle mBundle;
 
     @InjectView(R.id.img_detail_user)
-    SimpleDraweeView userImage;
+    ImageView userImage;
     @InjectView(R.id.user_detail_name)
     TextView userName;
     @InjectView(R.id.rating_star)
@@ -68,6 +71,7 @@ public class TripDetailFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.item_employee_detail_trip, container, false);
+
         ButterKnife.inject(this, rootView);
         initView();
         return rootView;
@@ -77,7 +81,6 @@ public class TripDetailFragment extends Fragment
     {
         setRatingStars(4.0d);
         userName.setText(mBundle.getString("name"));
-
     }
 
     @Override
