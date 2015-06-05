@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ohgo.ohgo.R;
+import com.ohgo.ohgo.fragments.EmployeeDetailsFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.TripDetailFragment;
 import com.ohgo.ohgo.models.Employee;
@@ -33,8 +34,8 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
         setContentView(R.layout.activity_employee_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //StartDetailsFragment();
         //StartListDetailFragment();
+        StartDetailsFragment();
         StartMapFragment();
         StartTripDetailsFragment();
     }
@@ -49,20 +50,19 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
         Fragment fragment = TripDetailFragment.getInstance(employeeBundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_trips, fragment).commit();
     }
-    /*
     void StartDetailsFragment()
-        {
-            SetEmployeBundle();
-            Fragment fragment = EmployeDetailsFragment.getInstance(employeeBundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.employee_details, fragment).commit();
-        }
+    {
+        Bundle b = new Bundle();b.putString("name","empleado");
+        Fragment fragment = EmployeeDetailsFragment.getInstance(b);
+        getSupportFragmentManager().beginTransaction().replace(R.id.employee_details, fragment).commit();
+    }
 
-        void StartListDetailFragment()
-        {
-            Fragment fragment = ListDetailFragment.getInstance(employeeBundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_list, fragment).commit();
-        }
-        */
+    /*void StartListDetailFragment()
+    {
+       Fragment fragment = ListDetailFragment.getInstance(employeeBundle);
+       getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_list, fragment).commit();
+    }*/
+
 
 
     @Override
