@@ -8,9 +8,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.ohgo.ohgo.R;
+import com.ohgo.ohgo.adapters.WorkPlanAdapter;
 import com.ohgo.ohgo.fragments.EmployeeDetailsFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.TripDetailFragment;
+import com.ohgo.ohgo.fragments.WorkPlanFragment;
 import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 import com.parse.ParseObject;
@@ -18,7 +20,8 @@ import com.parse.ParseObject;
 /**
  * Created by Ruben on 6/5/15.
  */
-public class EmployeeDetailActivity extends ActionBarActivity implements ServiceLocationFragment.OnFragmentInteractionListener
+public class EmployeeDetailActivity extends ActionBarActivity implements ServiceLocationFragment.OnFragmentInteractionListener,
+        WorkPlanFragment.OnFragmentInteractionListener
 {
     Bundle mapBundle;
     Bundle employeeBundle;
@@ -34,7 +37,7 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
         setContentView(R.layout.activity_employee_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //StartListDetailFragment();
+        StartListDetailFragment();
         StartDetailsFragment();
         StartMapFragment();
         StartTripDetailsFragment();
@@ -52,16 +55,16 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
     }
     void StartDetailsFragment()
     {
-        Bundle b = new Bundle();b.putString("name","empleado");
+        Bundle b = new Bundle();b.putString("name", "empleado");
         Fragment fragment = EmployeeDetailsFragment.getInstance(b);
         getSupportFragmentManager().beginTransaction().replace(R.id.employee_details, fragment).commit();
     }
 
-    /*void StartListDetailFragment()
+    void StartListDetailFragment()
     {
-       Fragment fragment = ListDetailFragment.getInstance(employeeBundle);
-       getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_list, fragment).commit();
-    }*/
+
+       getSupportFragmentManager().beginTransaction().replace(R.id.employee_detail_list, new WorkPlanFragment()).commit();
+    }
 
 
 
@@ -80,6 +83,11 @@ public class EmployeeDetailActivity extends ActionBarActivity implements Service
     @Override
     public void arriveToLocation(int status)
     {
+
+    }
+
+    @Override
+    public void onServiceSelected(Service service) {
 
     }
 }
