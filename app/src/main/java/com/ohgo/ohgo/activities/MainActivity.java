@@ -1,6 +1,7 @@
 package com.ohgo.ohgo.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,7 @@ import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
 import com.ohgo.ohgo.fragments.WorkersGridFragment;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -37,6 +39,7 @@ public class MainActivity extends ActionBarActivity
 {
     private FragmentManager fragmentManager;
     private static Menu menu;
+
 
     private boolean mOwnerView; //If Owner = True, If Employee = False
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -129,12 +132,9 @@ public class MainActivity extends ActionBarActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.addEmployee)
         {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, new AddWorkerFragment())
-                    .commit();
+            Intent intent = new Intent(this, NewEmployeeActivity.class);
+            startActivity(intent);
         }
-
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -212,5 +212,4 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
 }
