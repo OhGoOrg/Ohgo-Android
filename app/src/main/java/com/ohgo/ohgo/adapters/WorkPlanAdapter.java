@@ -44,16 +44,6 @@ public class WorkPlanAdapter extends ArrayAdapter{
             holder.txtUserName = (TextView) convertView.findViewById(R.id.txtUserName);
             holder.txtServiceDate = (TextView) convertView.findViewById(R.id.txtServiceDate);
 
-            holder.statusColor.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(context, EmployeeDetailActivity.class);
-                    context.startActivity(intent);
-                }
-            });
-
             convertView.setTag(holder);
         } else {
 
@@ -82,7 +72,8 @@ public class WorkPlanAdapter extends ArrayAdapter{
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder
+    {
         TextView txtUserName;
         TextView txtServiceDate;
         FrameLayout statusColor;

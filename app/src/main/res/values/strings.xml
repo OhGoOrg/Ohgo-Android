@@ -17,4 +17,5 @@
     <string name="num_stars">5</string>
     <string name="review">This is a very loooooooooooooooong descriptioooooooooooon</string>
     <string name="employee_detail_activity">DetailActivity</string>
+    <string name="add">Add</string>
 </resources>
