@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 
 import com.ohgo.ohgo.R;
+import com.ohgo.ohgo.fragments.AddWorkerFragment;
 import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
@@ -105,7 +106,7 @@ public class MainActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         this.menu = menu;
-        menu.fi
+
         setRefreshActionButtonState(false);
         if (!mNavigationDrawerFragment.isDrawerOpen())
         {
@@ -126,8 +127,11 @@ public class MainActivity extends ActionBarActivity
 
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.addEmployee)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, new AddWorkerFragment())
+                    .commit();
         }
 
 
