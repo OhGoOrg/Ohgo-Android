@@ -1,0 +1,48 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ohgo.ohgo.activities.LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/margin_center"
+
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_medium"
+            android:hint="@string/email"
+            android:layout_gravity="center"
+            android:nextFocusDown="@+id/etPassword"
+            android:paddingBottom="@dimen/padding_medium"
+            android:id="@+id/etUsername"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_medium"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_gravity="center"
+
+            android:paddingBottom="@dimen/padding_medium"
+            android:id="@+id/etPassword"/>
+
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="@dimen/font_title"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/login"
+            />
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -10,4 +10,6 @@
     <dimen name="font_medium">20sp</dimen>
     <dimen name="padding_small">5dp</dimen>
     <dimen name="thumbnail">150dp</dimen>
+    <dimen name="margin_center">40dp</dimen>
+    <dimen name="padding_medium">30dp</dimen>
 </resources>

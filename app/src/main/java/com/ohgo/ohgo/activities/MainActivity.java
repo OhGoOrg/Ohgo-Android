@@ -7,18 +7,25 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -54,6 +61,8 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        loadSample();
     }
 
     @Override
@@ -147,6 +156,59 @@ public class MainActivity extends ActionBarActivity
                 }
             }
         }
+    }
+
+    private void loadSample(){
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Employee");
+        query.whereEqualTo("name", "Jesus");
+        query.findInBackground( new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if( parseObjects.size() > 0)
+                Log.i("Brand", "Retrieved " + parseObjects.get(0).getString("name") + " Brands");
+
+
+            }
+        });
+
+        ParseObject employee = new ParseObject(Employee.CLASS_NAME);
+        //employee.put("userId", "nF6zyt33gl");
+        employee.put("name", "Ricardo");
+        employee.saveInBackground();
+
+        //employee.setUserId("nF6zyt33gl");
+        //employee.setName("Ricardo");
+
+
+
+
+/*
+        try {
+            ParseQuery<ParseUser> query1 = ParseUser.getQuery();
+            query1.findInBackground( new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> parseUsers, ParseException e) {
+                    ParseUser user = parseUsers.get(0);
+                    ParseRelation relation = employee.getRelation(Employee.CLASS_NAME);
+
+
+                }
+            });
+
+
+
+            //user.saveInBackground();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        */
+
+
+
+
+
     }
 
     /**

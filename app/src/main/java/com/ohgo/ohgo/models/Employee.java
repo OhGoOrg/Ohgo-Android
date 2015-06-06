@@ -8,50 +8,44 @@ import com.parse.ParseObject;
  * Created by Rick on 05/06/15.
  */
 
-@ParseClassName("Employee")
-public class Employee extends  ParseObject{
+@ParseClassName("Employeee")
+public class Employee extends ParseObject{
 
+    public static final String CLASS_NAME = "Employee";
+    private String employeeId;
+    private String userId;
     private String name;
-    private double latitude;
-    private double longitude;
-    private int customerId;
+
 
     public Employee(){}
 
-    public Employee(String name, double latitude, double longitude, int customerId)
-    {
+    public Employee(String theClassName, String userId, String name) {
+        super(theClassName);
+        this.userId = userId;
         this.name = name;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.customerId = customerId;
     }
 
-    public String getName()
-    {
-        return getString("name");
-    }
-    public void setName(String value)
-    {
-        put("name", value);
+    public String getEmployeeId() {
+        return employeeId;
     }
 
-    public double getLatitude()
-    {
-        return getDouble("latitude");
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public void setLatitude(double value) {
-        put("latitude",value);
+    public String getUserId() {
+        return userId;
     }
 
-    public double getLongitude()
-    {
-        return getDouble("longitude");
+    public void setUserId(String userId) {
+        put("userId", userId);
     }
 
-    public void setLongitude(double value)
-    {
-        put("longitude",value);
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        put("name", name);
+    }
 }

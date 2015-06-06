@@ -26,6 +26,11 @@ import com.ohgo.ohgo.models.Service;
 import com.ohgo.ohgo.models.User;
 import com.ohgo.ohgo.util.JSONParser;
 import com.ohgo.ohgo.util.LocationUtil;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,11 +76,32 @@ public class ServiceLocationFragment extends Fragment {
             if(gMap != null && (distance > 10.0 || distance == 0.0)){
 
 
+
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 builder.include(loc);
                 builder.include(new LatLng(service.getLatitude(), service.getLongitude()));
-
+                ;
                 LatLngBounds bounds = builder.build();
+
+                final ParseObject locationP = new ParseObject("EmployeeLocation");
+                locationP.put("latitude", loc.latitude);
+                locationP.put("longitude", loc.longitude);
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Employee");
+                query.whereEqualTo("name", "Ricardo");
+                query.findInBackground( new FindCallback<ParseObject>() {
+                    @Override
+                    public void done(List<ParseObject> parseObjects, ParseException e) {
+                        if(parseObjects.size() > 0) {
+                            ParseRelation parseRelation = locationP.getRelation("employeeId");
+                            parseRelation.add(parseObjects.get(0));
+                            locationP.saveInBackground();
+                        }
+
+                    }
+                });
+
+
 
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 20);
                 gMap.moveCamera(cu);
@@ -250,9 +276,4 @@ public class ServiceLocationFragment extends Fragment {
             }
         }
     }
-
-
-
-
-
 }
