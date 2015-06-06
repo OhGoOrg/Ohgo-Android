@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
@@ -15,13 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/map_detail"/>
+            android:id="@+id/employee_detail_trips"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:id="@+id/employee_detail_trips"/>
+            android:id="@+id/employee_detail_list"/>
 
     </LinearLayout>
 
@@ -31,18 +32,19 @@
         android:layout_weight="1.5"
         android:orientation="vertical">
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/employee_details"
+            android:id="@+id/map_detail"
             android:layout_weight="1.5"/>
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/employee_detail_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/employee_details"
             android:layout_weight="0.5"/>
 
 
     </LinearLayout>
+
 
 </LinearLayout>

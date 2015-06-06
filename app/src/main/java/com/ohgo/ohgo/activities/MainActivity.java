@@ -18,6 +18,7 @@ import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
+import com.ohgo.ohgo.fragments.WorkersGridFragment;
 import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 import com.parse.FindCallback;
@@ -28,22 +29,18 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 
+
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
         WorkPlanFragment.OnFragmentInteractionListener,
+        WorkersGridFragment.OnFragmentInteractionListener,
         ServiceLocationFragment.OnFragmentInteractionListener
 {
     private FragmentManager fragmentManager;
     private static Menu menu;
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+    private boolean mOwnerView; //If Owner = True, If Employee = False
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     @Override
@@ -51,28 +48,38 @@ public class MainActivity extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
-        setContentView(R.layout.activity_main);
+        mOwnerView=false; //FOR NOW,UNTIL WE IMPLEMENT USER TYPE
 
+        setContentView(R.layout.activity_main);
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
+
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         loadSample();
+
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(int position)
+    {
+        //GET OWNER VIEW
 
         switch (position){
             case 0:
-                fragmentManager.beginTransaction()
+                if (mOwnerView)
+                 fragmentManager.beginTransaction()
                         .replace(R.id.container, new WorkPlanFragment())
                         .commit();
+                else {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, new WorkersGridFragment())
+                        .commit();}
                 break;
         }
 
@@ -131,8 +138,8 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onServiceSelected(Service service) {
-
+    public void onServiceSelected(Service service)
+    {
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.container, ServiceLocationFragment.newInstance(service))
@@ -145,13 +152,18 @@ public class MainActivity extends ActionBarActivity
     }
 
     public static void setRefreshActionButtonState(boolean refresh){
-        if(menu!=null){
+        if(menu!=null)
+        {
+
             MenuItem refreshItem = menu.findItem(R.id.menuRefresh);
-            if(refreshItem!=null){
-                if(refresh){
+            if(refreshItem!=null)
+            {
+                if(refresh)
+                {
                     refreshItem.setVisible(true);
                     refreshItem.setActionView(R.layout.loading);
-                }else{
+                }else
+                {
                     refreshItem.setVisible(false);
                 }
             }
@@ -244,7 +256,8 @@ public class MainActivity extends ActionBarActivity
         }
 
         @Override
-        public void onAttach(Activity activity) {
+        public void onAttach(Activity activity)
+        {
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));

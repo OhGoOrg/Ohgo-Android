@@ -78,5 +78,6 @@ public class EmployeeDetailsFragment extends Fragment {
     {
         float num_stars = new Float(rating) / 2;
         ratingBar.setRating(num_stars);
+        ratingBar.setIsIndicator(true);
     }
 }

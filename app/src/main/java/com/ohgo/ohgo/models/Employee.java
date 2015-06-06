@@ -1,12 +1,12 @@
 package com.ohgo.ohgo.models;
 
 import com.parse.ParseClassName;
-
 import com.parse.ParseObject;
 
 /**
- * Created by Rick on 05/06/15.
+ * Created by Ruben on 6/5/15.
  */
+
 
 @ParseClassName("Employeee")
 public class Employee extends ParseObject{
@@ -44,6 +44,7 @@ public class Employee extends ParseObject{
     public String getName() {
         return name;
     }
+
 
     public void setName(String name) {
         put("name", name);

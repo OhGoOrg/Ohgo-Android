@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 
 
 import com.ohgo.ohgo.R;
@@ -29,6 +28,7 @@ import butterknife.ButterKnife;
  */
 public class TripDetailFragment extends Fragment
 {
+
 
     public Context CONTEXT;
     Bundle mBundle;
@@ -71,7 +71,6 @@ public class TripDetailFragment extends Fragment
                              Bundle savedInstanceState)
     {
         View rootView = inflater.inflate(R.layout.item_employee_detail_trip, container, false);
-
         ButterKnife.inject(this, rootView);
         initView();
         return rootView;
@@ -93,5 +92,6 @@ public class TripDetailFragment extends Fragment
     {
         float num_stars = new Float(rating) / 2;
         ratingBar.setRating(num_stars);
+        ratingBar.setIsIndicator(true);
     }
 }

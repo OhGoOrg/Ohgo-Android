@@ -18,10 +18,9 @@
     <string name="review">This is a very loooooooooooooooong descriptioooooooooooon</string>
     <string name="employee_detail_activity">DetailActivity</string>
 
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="add">Add</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">LogIn</string>
+
 </resources>

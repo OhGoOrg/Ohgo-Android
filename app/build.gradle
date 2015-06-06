@@ -27,7 +27,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.1.71'
     compile 'com.jakewharton:butterknife:5.1.1'
     compile 'me.neavo:volley:2014.12.09'
-    compile 'com.facebook.fresco:drawee:0.5.1'
+    compile project(':bolts-android-1.2.0')
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:support-v4:22.2.0'
 }
