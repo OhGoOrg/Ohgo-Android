@@ -13,5 +13,4 @@
         android:icon="@drawable/ic_add_box_white_48dp"
         android:orderInCategory="1"
         app:showAsAction="always"/>
-
 </menu>
