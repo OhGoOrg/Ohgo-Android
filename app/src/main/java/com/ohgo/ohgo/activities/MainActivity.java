@@ -53,11 +53,18 @@ public class MainActivity extends ActionBarActivity
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private CharSequence mTitle;
+    private String objectId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        if(getIntent().getExtras()!= null){
+            this.objectId = getIntent().getExtras().getString("employee");
+            //this.mOwnerView = false;
+
+        }
         super.onCreate(savedInstanceState);
+
 
         fragmentManager = getSupportFragmentManager();
         setContentView(R.layout.activity_main);
@@ -74,7 +81,7 @@ public class MainActivity extends ActionBarActivity
 
 
         mNavigationDrawerFragment.setUp(mFragmentContainerView, drawerLayoutND, toolbar);
-        fragmentManager.beginTransaction().replace(R.id.container, new WorkersGridFragment()).commit();
+
 
     }
 
@@ -85,11 +92,12 @@ public class MainActivity extends ActionBarActivity
         if (currentPosition!=position)
         {
             currentPosition = position;
-            Fragment fragment;
-            switch (currentPosition)
+
+            switch (position)
             {
                 case 1:
-                    fragment = mOwnerView ? new WorkPlanFragment() : new WorkersGridFragment();
+                    Fragment fragment;
+                    fragment = new WorkPlanFragment();
                     fragmentManager.beginTransaction()
                             .replace(R.id.container, fragment)
                             .commit();
