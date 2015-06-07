@@ -5,13 +5,15 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.io.Serializable;
+
 /**
  * Created by Ruben on 6/5/15.
  */
 
 
 @ParseClassName("Employee")
-public class Employee extends ParseObject {
+public class Employee extends ParseObject implements Serializable{
 
     public Employee() {}
 

@@ -9,7 +9,7 @@
     android:orientation="horizontal">
 
 
-        <ImageView
+        <com.ohgo.ohgo.util.RoundedImageView
             android:id="@+id/img_detail_employee"
             android:layout_width="0dp"
             android:layout_height="match_parent"

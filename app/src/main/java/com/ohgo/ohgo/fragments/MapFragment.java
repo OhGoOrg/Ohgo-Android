@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -23,8 +24,14 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.activities.MainActivity;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 import com.ohgo.ohgo.util.JSONParser;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,6 +45,7 @@ import java.util.List;
  */
 public class MapFragment extends Fragment {
 
+    private static final String ARG_PARAM_EMPLOY = "paramEmploy";
     private static final String ARG_PARAM_SERVICE = "paramService";
 
     private OnFragmentInteractionListener mListener;
@@ -46,7 +54,19 @@ public class MapFragment extends Fragment {
     private GoogleMap gMap;
     private Service service;
     private LatLng loc;
+    private Employee employee;
 
+
+
+
+    public static MapFragment newInstance(Employee employee)
+    {
+        MapFragment fragment = new MapFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PARAM_EMPLOY, employee);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public static MapFragment newInstance(Service service)
     {
@@ -66,8 +86,13 @@ public class MapFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null)
-            this.service = (Service) getArguments().getSerializable(ARG_PARAM_SERVICE);
+        if (getArguments() != null) {
+            if(getArguments().getSerializable(ARG_PARAM_EMPLOY) != null)
+                this.employee = (Employee) getArguments().getSerializable(ARG_PARAM_EMPLOY);
+
+            if(getArguments().getSerializable(ARG_PARAM_SERVICE) != null)
+                this.service = (Service) getArguments().getSerializable(ARG_PARAM_SERVICE);
+        }
     }
 
     @Override
@@ -94,12 +119,57 @@ public class MapFragment extends Fragment {
             }
         });
 
+        if(employee!=null){
+            loadLocationEmployee();
+        }
+
 
 
         return view;
     }
 
 
+    public void loadLocationEmployee(){
+
+        final ParseQuery<ParseObject> query = ParseQuery.getQuery("EmployeeLocation");
+
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+                if (parseObjects != null) {
+
+                    for (int i = 0; i < parseObjects.size(); i++) {
+                        ParseRelation relation = parseObjects.get(i).getRelation("EmployeeId");
+                        ParseQuery parseQuery = relation.getQuery();
+                        query.whereEqualTo("objectId", "OsWR5AhkMu");
+                        try {
+                            if (query.find().size() > 0) Log.e("Exist", "i: " + i);
+                        } catch (ParseException er){
+                            er.printStackTrace();
+                        }
+
+
+                    }
+                    Log.e("LOCATION", "" + parseObjects.size());
+                    ParseObject parseLocation = parseObjects.get(0);
+                    LatLng location = new LatLng(parseLocation.getDouble("latitude"), parseLocation.getDouble("longitude"));
+                    gMap.addMarker((new MarkerOptions().position(location)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubicacion))));
+                    CameraPosition cameraPosition = new CameraPosition.Builder()
+                            .target(location)      // Sets the center of the map to Mountain View
+                            .zoom(5)                   // Sets the zoom
+                            .bearing(0)                // Sets the orientation of the camera to east
+                            .tilt(0)                   // Sets the tilt of the camera to 30 degrees
+                            .build();
+
+                    gMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
     public void setLocation()
     {
         if (service!=null)

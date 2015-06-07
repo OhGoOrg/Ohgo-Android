@@ -12,12 +12,38 @@ import android.widget.Toast;
 
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.adapters.WorkPlanAdapter;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 
 
 public class WorkPlanFragment extends Fragment
 {
     private OnFragmentInteractionListener mListener;
+
+    private static final String ARG_PARAM_EMPLOYEE = "paramEmployee";
+
+    private Employee employee;
+
+    public static WorkPlanFragment newInstance(Employee employee) {
+        WorkPlanFragment fragment = new WorkPlanFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PARAM_EMPLOYEE, employee);
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public WorkPlanFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            this.employee = (Employee) getArguments().getSerializable(ARG_PARAM_EMPLOYEE);
+        }
+    }
 
 
     @Override

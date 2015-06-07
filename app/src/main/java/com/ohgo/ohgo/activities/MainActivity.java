@@ -18,6 +18,7 @@ import com.ohgo.ohgo.fragments.NavigationDrawerFragment;
 import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
 import com.ohgo.ohgo.fragments.WorkersGridFragment;
+import com.ohgo.ohgo.models.Employee;
 import com.ohgo.ohgo.models.Service;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -43,7 +44,7 @@ public class MainActivity extends ActionBarActivity
     @InjectView(R.id.navigation_drawer)
     View mFragmentContainerView;
 
-    private static boolean mOwnerView = false; //If Owner = True, If Employee = False
+    private static boolean mOwnerView = true; //If Owner = True, If Employee = False
     private static Menu menu;
 
     private FragmentManager fragmentManager;
@@ -243,4 +244,17 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+    @Override
+    public void onEmployeeSelected(Employee employee) {
+
+
+        Intent intent = new Intent(getApplicationContext(),EmployeeDetailActivity.class);
+        //intent.putExtra("employee", employee);
+        intent.putExtra("objectId", employee.getObjectId());
+
+        Log.e("OBJID",intent.getExtras().getString("objectId"));
+        //Employee e = (Employee) intent.getExtras().getSerializable("employee");
+
+        startActivity(intent);
+    }
 }

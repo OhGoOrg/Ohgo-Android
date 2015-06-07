@@ -1,17 +1,16 @@
 package com.ohgo.ohgo.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ohgo.ohgo.R;
-import com.ohgo.ohgo.activities.EmployeeDetailActivity;
-import com.ohgo.ohgo.models.Service;
+import com.ohgo.ohgo.models.Employee;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,15 +20,15 @@ import java.util.ArrayList;
 public class GridWorkerAdapter extends ArrayAdapter {
     private Context context;
     private int resource;
-    private ArrayList<Service> services;
+    private ArrayList<Employee> employees;
     private LayoutInflater inflater;
 
-    public GridWorkerAdapter(Context context, int resource, ArrayList services)
+    public GridWorkerAdapter(Context context, int resource, ArrayList<Employee> employees)
     {
-        super(context, resource, services);
+        super(context, resource, employees);
         this.context = context;
         this.resource = resource;
-        this.services = services;
+        this.employees = employees;
         this.inflater = LayoutInflater.from(context);
     }
 
@@ -43,6 +42,7 @@ public class GridWorkerAdapter extends ArrayAdapter {
             holder = new ViewHolder();
 
             holder.txtUserName = (TextView) convertView.findViewById(R.id.employee_name);
+            holder.imgEmployee = (ImageView) convertView.findViewById(R.id.imgEmployee);
 
 
             convertView.setTag(holder);
@@ -52,17 +52,11 @@ public class GridWorkerAdapter extends ArrayAdapter {
         }
 
 
-        holder.txtUserName.setText("User "+"dfxhgjk");
-        holder.txtUserName.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(context, EmployeeDetailActivity.class);
-                context.startActivity(intent);
-            }
-        });
+        Employee employee = employees.get(position);
+        holder.txtUserName.setText(employee.getName());
 
+
+        Picasso.with(context).load(employee.getParseFile("photo").getUrl()).into(holder.imgEmployee);
 
         return convertView;
     }
@@ -70,5 +64,6 @@ public class GridWorkerAdapter extends ArrayAdapter {
     class ViewHolder
     {
         TextView txtUserName;
+        ImageView imgEmployee;
     }
 }

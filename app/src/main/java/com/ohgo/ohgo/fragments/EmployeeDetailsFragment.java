@@ -1,56 +1,52 @@
 package com.ohgo.ohgo.fragments;
 
-import android.support.v4.app.Fragment;
-
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.ohgo.ohgo.R;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import com.ohgo.ohgo.models.Employee;
+import com.ohgo.ohgo.util.RoundedImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Ruben on 6/5/15.
  */
 public class EmployeeDetailsFragment extends Fragment {
     public Context CONTEXT;
+    public static final String ARG_PARAM_EMPLOY = "paramEmploy";
     Bundle mBundle;
+    private Employee employee;
 
-    @InjectView(R.id.img_detail_employee)
-    ImageView userImage;
-    @InjectView(R.id.employee_detail_name)
-    TextView employeeName;
-    @InjectView(R.id.rating_star)
-    RatingBar ratingBar;
 
 
     public EmployeeDetailsFragment() {}
 
-    public static EmployeeDetailsFragment getInstance(Bundle bundle)
+    public static EmployeeDetailsFragment newInstance(Employee employee)
     {
-        EmployeeDetailsFragment frag = new EmployeeDetailsFragment();
-        frag.setArguments(bundle);
-        return frag;
+        EmployeeDetailsFragment fragment = new EmployeeDetailsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PARAM_EMPLOY, employee);
+        fragment.setArguments(args);
+        return fragment;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        CONTEXT = activity;
-        mBundle = getArguments();
-    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        if(getArguments()!=null){
+            this.employee = (Employee) getArguments().getSerializable(ARG_PARAM_EMPLOY);
+
+        }
+
     }
 
     @Override
@@ -58,15 +54,16 @@ public class EmployeeDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.item_employe_detail, container, false);
 
-        ButterKnife.inject(this, rootView);
-        initView();
+        TextView txtName = (TextView) rootView.findViewById(R.id.employee_detail_name);
+        RoundedImageView imgPic = (RoundedImageView) rootView.findViewById(R.id.img_detail_employee);
+
+        Picasso.with(getActivity()).load(employee.getPhotoFile().getUrl()).into(imgPic);
+        txtName.setText(employee.getName());
+
         return rootView;
     }
 
-    private void initView() {
-        setRatingStars(9.0d);
-        employeeName.setText(mBundle.getString("name"));
-    }
+
 
     @Override
     public void onResume()
@@ -77,7 +74,7 @@ public class EmployeeDetailsFragment extends Fragment {
     public void setRatingStars(Double rating)
     {
         float num_stars = new Float(rating) / 2;
-        ratingBar.setRating(num_stars);
-        ratingBar.setIsIndicator(true);
+       // ratingBar.setRating(num_stars);
+       // ratingBar.setIsIndicator(true);
     }
 }

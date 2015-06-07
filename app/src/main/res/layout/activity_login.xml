@@ -20,6 +20,7 @@
             android:layout_gravity="center"
             android:nextFocusDown="@+id/etPassword"
             android:paddingBottom="@dimen/padding_medium"
+            android:textColor="@color/blue_aqua"
             android:id="@+id/etUsername"/>
         <EditText
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:layout_gravity="center"
-
+            android:textColor="@color/blue_aqua"
             android:paddingBottom="@dimen/padding_medium"
             android:id="@+id/etPassword"/>
 
