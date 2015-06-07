@@ -1,19 +1,15 @@
 package com.ohgo.ohgo.app;
 
 import android.app.Application;
-import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.Volley;
 import com.ohgo.ohgo.activities.MainActivity;
-import com.ohgo.ohgo.models.Employee;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
-import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.PushService;
+import com.parse.SaveCallback;
 
 
 /**
@@ -26,78 +22,49 @@ public class ParsePushApplication extends Application {
      */
     public static final String TAG = "VolleyPatterns";
 
-    /**
-     * Global request queue for Volley
-     */
-    private RequestQueue mRequestQueue;
-
-    /**
-     * A singleton instance of the application class for easy access in other places
-     */
     private static ParsePushApplication sInstance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ParseObject.registerSubclass(Employee.class);
-        Log.e("Start", "STY");
+
+        // Initialize the Parse SDK.
+        Parse.setLogLevel(Parse.LOG_LEVEL_VERBOSE);
+        Parse.enableLocalDatastore(this);
         Parse.initialize(this, "GbhsPA5Oh2yu2voFbxo45iJgFqPoJWd3kzZnqBZi", "diMBtwqe0Ysm0XXp2wb5fD5qpKusC1pkPeEgKDIQ");
-        Log.e("Start", "STYI");
         PushService.setDefaultPushCallback(this, MainActivity.class);
+        //ParseObject.registerSubclass(Employee.class);
+        ParsePush.subscribeInBackground("", new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
+                } else {
+                    Log.e("com.parse.push", "failed to subscribe for push", e);
+                }
+            }
+        });
+        Log.d("Start", "STY");
+        ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.i(TAG, "Installation saved successfully");
+                } else {
+                    Log.e(TAG, "Installation failed to save: " + e);
+                }
+            }
+        });
 
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        Log.d("Start", "STYI");
+
+
+       /*
+        */
+        //ParseInstallation.getCurrentInstallation().saveInBackground();
 
 
 
-        // initialize the singleton
-        sInstance = this;
     }
 
-    /**
-     * @return ApplicationController singleton instance
-     */
-    public static synchronized ParsePushApplication getInstance() {
-        return sInstance;
-    }
 
-    /**
-     * @return The Volley Request queue, the queue will be created if it is null
-     */
-    public RequestQueue getRequestQueue() {
-        // lazy initialize the request queue, the queue instance will be
-        // created when it is accessed for the first time
-        if (mRequestQueue == null) {
-            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-        }
-
-        return mRequestQueue;
-    }
-
-    /**
-     * Adds the specified request to the global queue, if tag is specified
-     * then it is used else Default TAG is used.
-     *
-     * @param req
-     * @param tag
-     */
-    public <T> void addToRequestQueue(Request<T> req, String tag) {
-        // set the default tag if tag is empty
-        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-
-        VolleyLog.d("Adding request to queue: %s", req.getUrl());
-
-        getRequestQueue().add(req);
-    }
-
-    /**
-     * Cancels all pending requests by the specified TAG, it is important
-     * to specify a TAG so that the pending/ongoing requests can be cancelled.
-     *
-     * @param tag
-     */
-    public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
-        }
-    }
 }
