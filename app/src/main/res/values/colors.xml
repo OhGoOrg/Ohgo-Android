@@ -12,5 +12,11 @@
     <color name="textfilter">#84bbc7b6</color>
     <color name="button">#99467da2</color>
 
+
+    <color name="offline">#f86e5c</color>
+    <color name="online">#65ae64</color>
+    <color name="working">#386da7</color>
+    <color name="BLU">#324d5d</color>
+
 </resources>
 
