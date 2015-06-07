@@ -12,16 +12,18 @@ public class Service implements Serializable {
     private Date serviceDate;
     private int userId;
     private int status;
-    private double latitude;
-    private double longitude;
+    private double latStart;
+    private double lonStart;
     private Rate rate;
+    private double latEnd;
+    private double lonEnd;
 
-    public Service(Date serviceDate, int userId, int status, double latitude, double longitude) {
+    public Service(Date serviceDate, int userId, int status, double latEnd, double lonEnd) {
         this.serviceDate = serviceDate;
         this.userId = userId;
         this.status = status;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.latEnd = latEnd;
+        this.lonEnd = lonEnd;
     }
 
     public Date getServiceDate() {
@@ -48,20 +50,36 @@ public class Service implements Serializable {
         this.status = status;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public double getLatStart() {
+        return latStart;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLatStart(double latStart) {
+        this.latStart = latStart;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public double getLonStart() {
+        return lonStart;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setLonStart(double lonStart) {
+        this.lonStart = lonStart;
+    }
+
+    public double getLatEnd() {
+        return latEnd;
+    }
+
+    public void setLatEnd(double latEnd) {
+        this.latEnd = latEnd;
+    }
+
+    public double getLonEnd() {
+        return lonEnd;
+    }
+
+    public void setLonEnd(double lonEnd) {
+        this.lonEnd = lonEnd;
     }
 
     public Rate getRate() {

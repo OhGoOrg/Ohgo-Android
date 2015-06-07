@@ -12,4 +12,6 @@
     <dimen name="thumbnail">150dp</dimen>
     <dimen name="margin_center">40dp</dimen>
     <dimen name="padding_medium">30dp</dimen>
+    <dimen name="left_bar">15dp</dimen>
+    <dimen name="padding_big">40dp</dimen>
 </resources>

@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/employee_detail_trips"/>
+            android:background="@color/blue_aqua"
+            android:id="@+id/employee_details"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -26,25 +27,27 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1.5"
-        android:orientation="vertical">
+        android:layout_weight="1.5">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:id="@+id/map_detail"
-            android:layout_weight="1.5"/>
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/employee_details"
-            android:layout_weight="0.5"/>
+            android:layout_height="100dp"
+            android:id="@+id/employee_detail_trips"
+            android:layout_alignParentBottom="true"
+            android:background="@color/blue_custom"
+            android:layout_weight="0.5"
+            />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>

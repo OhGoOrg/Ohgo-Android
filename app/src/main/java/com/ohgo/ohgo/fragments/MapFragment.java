@@ -2,11 +2,11 @@ package com.ohgo.ohgo.fragments;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +23,13 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.ohgo.ohgo.R;
 import com.ohgo.ohgo.activities.MainActivity;
 import com.ohgo.ohgo.models.Service;
-import com.ohgo.ohgo.models.User;
 import com.ohgo.ohgo.util.JSONParser;
-import com.ohgo.ohgo.util.LocationUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,38 +60,6 @@ public class MapFragment extends Fragment {
     {
         // Required empty public constructor
     }
-    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
-        @Override
-        public void onMyLocationChange(Location location)
-        {
-            if (service==null) //WE NEED TO MOVE THIS TO THE WORKER LOCATION; NOT THE OWNER LOCATION; API
-                service = new Service(Calendar.getInstance().getTime(),1,1,location.getLatitude(),location.getLongitude());
-
-            double distance = 0.0;
-            if(loc != null){
-                distance = LocationUtil.distance(loc.latitude, loc.longitude, location.getLatitude(), location.getLongitude());
-
-            }else
-                loc = new LatLng(location.getLatitude(), location.getLongitude());
-
-            if(gMap != null && (distance > 10.0 || distance == 0.0) )
-            {
-                LatLngBounds.Builder builder = new LatLngBounds.Builder();
-                builder.include(loc);
-
-                builder.include(new LatLng(service.getLatitude(), service.getLongitude()));
-
-                LatLngBounds bounds = builder.build();
-
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 30);
-                gMap.moveCamera(cu);
-                gMap.animateCamera(cu);
-                new GetRouteLocation(makeURL(loc.latitude,loc.longitude,service.getLatitude(), service.getLongitude())).execute();
-            }
-        }
-    };
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -108,14 +72,29 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_service_location, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
         FragmentManager fragmentManager = getChildFragmentManager();
         supportMapFragment = (SupportMapFragment) fragmentManager.findFragmentById(R.id.map);
 
         gMap = supportMapFragment.getMap();
-        gMap.setMyLocationEnabled(true);
-        gMap.setOnMyLocationChangeListener(myLocationChangeListener);
-        setLocation();
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                mListener.onCameraChange(true);
+
+            }
+        });
+
+
+        gMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                setLocation();
+            }
+        });
+
+
+
         return view;
     }
 
@@ -125,8 +104,37 @@ public class MapFragment extends Fragment {
 
         if (service!=null)
         {
-            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatitude(), service.getLongitude()))).title("USER"));
-            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(service.getLatitude(), service.getLongitude()), 10));
+            service.setLatStart(40.717626);
+            service.setLonStart(-73.997534);
+            //double distance = 0.0;
+            //distance = LocationUtil.distance(service.getLatStart(), service.getLonStart(), service.getLatEnd(), service.getLonEnd());
+
+
+
+            loc = new LatLng(service.getLatStart(), service.getLonStart());
+
+            LatLng locCustomer = new LatLng(service.getLatEnd(), service.getLonEnd());
+            Log.e("LATLON", loc.toString());
+            Log.e("LATLONC", locCustomer.toString());
+
+            if(gMap != null )
+            {
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+                builder.include(loc);
+
+                builder.include(locCustomer);
+
+                LatLngBounds bounds = builder.build();
+
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 30);
+                gMap.moveCamera(cu);
+                gMap.animateCamera(cu);
+                new GetRouteLocation(makeURL(loc.latitude,loc.longitude,service.getLatEnd(), service.getLonEnd())).execute();
+            }
+
+            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatStart(), service.getLonStart()))).title("Employee"));
+            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("Customer"));
         }
     }
     @Override
@@ -149,7 +157,9 @@ public class MapFragment extends Fragment {
 
     public interface OnFragmentInteractionListener
     {
-        public void arriveToLocation(int status);
+        public void onCameraChange(boolean status);
+
+
     }
 
 

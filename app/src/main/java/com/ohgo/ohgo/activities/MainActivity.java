@@ -111,7 +111,7 @@ public class MainActivity extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         this.menu = menu;
-        menu.fi
+
         setRefreshActionButtonState(false);
         if (!mNavigationDrawerFragment.isDrawerOpen())
         {

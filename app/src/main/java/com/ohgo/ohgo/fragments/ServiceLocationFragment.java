@@ -79,7 +79,7 @@ public class ServiceLocationFragment extends Fragment {
 
                 LatLngBounds.Builder builder = new LatLngBounds.Builder();
                 builder.include(loc);
-                builder.include(new LatLng(service.getLatitude(), service.getLongitude()));
+                builder.include(new LatLng(service.getLatEnd(), service.getLonEnd()));
                 ;
                 LatLngBounds bounds = builder.build();
 
@@ -106,7 +106,7 @@ public class ServiceLocationFragment extends Fragment {
                 CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 20);
                 gMap.moveCamera(cu);
                 gMap.animateCamera(cu);
-                new GetRouteLocation(makeURL(loc.latitude,loc.longitude,service.getLatitude(), service.getLongitude())).execute();
+                new GetRouteLocation(makeURL(loc.latitude,loc.longitude,service.getLatEnd(), service.getLonEnd())).execute();
             }
         }
     };
@@ -143,8 +143,8 @@ public class ServiceLocationFragment extends Fragment {
 
 
     public void setLocation(){
-        gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatitude(), service.getLongitude()))).title("USER"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(service.getLatitude(),service.getLongitude()), 10));
+        gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("USER"));
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(service.getLatEnd(),service.getLonEnd()), 10));
 
     }
     @Override

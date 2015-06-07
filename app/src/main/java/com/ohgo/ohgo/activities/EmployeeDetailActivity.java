@@ -1,21 +1,19 @@
 package com.ohgo.ohgo.activities;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.ohgo.ohgo.R;
-import com.ohgo.ohgo.adapters.WorkPlanAdapter;
 import com.ohgo.ohgo.fragments.EmployeeDetailsFragment;
 import com.ohgo.ohgo.fragments.MapFragment;
-import com.ohgo.ohgo.fragments.ServiceLocationFragment;
 import com.ohgo.ohgo.fragments.TripDetailFragment;
 import com.ohgo.ohgo.fragments.WorkPlanFragment;
 import com.ohgo.ohgo.models.Service;
-import com.parse.ParseObject;
 
 /**
  * Created by Ruben on 6/5/15.
@@ -25,6 +23,7 @@ public class EmployeeDetailActivity extends ActionBarActivity implements MapFrag
 {
     Bundle mapBundle;
     FragmentManager manager;
+    RelativeLayout relativeLayout;
 
 
     @Override
@@ -34,6 +33,7 @@ public class EmployeeDetailActivity extends ActionBarActivity implements MapFrag
         mapBundle = new Bundle();
         setContentView(R.layout.activity_employee_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        relativeLayout = (RelativeLayout) findViewById(R.id.employee_detail_trips);
 
         StartListDetailFragment();
         StartDetailsFragment();
@@ -84,14 +84,20 @@ public class EmployeeDetailActivity extends ActionBarActivity implements MapFrag
     }
 
     @Override
-    public void arriveToLocation(int status)
+    public void onCameraChange(boolean status)
     {
+
+
+
+        if(status)
+        relativeLayout.setVisibility(View.INVISIBLE);
 
     }
 
     @Override
     public void onServiceSelected(Service service)
     {
+        relativeLayout.setVisibility(View.VISIBLE);
         StartMapFragment(service); //Service tiene un customer Id
         Bundle employeeBundle = new Bundle();
         employeeBundle.putString("name", "NombreEmpleado"); //DEJAR HARCODE POR EL BIEN DE TODOS

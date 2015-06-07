@@ -2,14 +2,17 @@ package com.ohgo.ohgo.app;
 
 import android.app.Application;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 import com.ohgo.ohgo.activities.MainActivity;
+import com.ohgo.ohgo.models.Employee;
 import com.parse.Parse;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.PushService;
 
 
@@ -36,8 +39,10 @@ public class ParsePushApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        //ParseObject.registerSubclass(Employee.class);
+        ParseObject.registerSubclass(Employee.class);
+        Log.e("Start", "STY");
         Parse.initialize(this, "GbhsPA5Oh2yu2voFbxo45iJgFqPoJWd3kzZnqBZi", "diMBtwqe0Ysm0XXp2wb5fD5qpKusC1pkPeEgKDIQ");
+        Log.e("Start", "STYI");
         PushService.setDefaultPushCallback(this, MainActivity.class);
         ParseInstallation.getCurrentInstallation().saveInBackground();
 

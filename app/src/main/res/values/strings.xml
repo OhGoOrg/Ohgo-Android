@@ -22,5 +22,6 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="login">LogIn</string>
+    <string name="title_activity_login">Log In</string>
 
 </resources>

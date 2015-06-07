@@ -10,6 +10,8 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="textfilter">#84bbc7b6</color>
+    <color name="blue_custom">#CC4f7cab</color>
+    <color name="blue_aqua">#CC9fc0d2</color>
 
 </resources>
 
