@@ -39,6 +39,7 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
+            android:theme="@style/AppTheme.Toolbar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,7 +66,7 @@
 
         <activity
             android:name=".activities.NewEmployeeActivity"
-            android:label="@string/employee_detail_activity" >
+            android:label="@string/new_employee_activity" >
         </activity>
 
     </application>

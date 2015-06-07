@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -15,9 +16,8 @@ import com.ohgo.ohgo.models.Employee;
 /**
  * Created by Ruben on 6/6/15.
  */
-public class NewEmployeeActivity extends Activity
+public class NewEmployeeActivity extends ActionBarActivity
 {
-
     private Employee employee;
 
     @Override
@@ -30,6 +30,8 @@ public class NewEmployeeActivity extends Activity
 
 
         setContentView(R.layout.activity_new_employee);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         FragmentManager manager = getFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
 

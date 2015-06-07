@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="1"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:mlns="http://schemas.android.com/apk/res-auto">
-
-
-    <RelativeLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/employee_details"
-        android:layout_weight=".5">
-    </RelativeLayout>
-
-    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/employee_details"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:id="@+id/employee_detail_list"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/map_detail"
-        android:layout_weight=".5"/>
-
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/employee_detail_list"
-        android:layout_weight=".5">
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/employee_detail_trips"
-        android:layout_weight=".5">
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/map_detail"
+            android:layout_weight="1.5"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/employee_detail_trips"
+            android:layout_weight="0.5"/>
+    </LinearLayout>
 </LinearLayout>
