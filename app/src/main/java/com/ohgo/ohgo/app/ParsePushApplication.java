@@ -4,9 +4,11 @@ import android.app.Application;
 import android.util.Log;
 
 import com.ohgo.ohgo.activities.MainActivity;
+import com.ohgo.ohgo.models.Employee;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
+import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.PushService;
 import com.parse.SaveCallback;
@@ -33,7 +35,7 @@ public class ParsePushApplication extends Application {
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "GbhsPA5Oh2yu2voFbxo45iJgFqPoJWd3kzZnqBZi", "diMBtwqe0Ysm0XXp2wb5fD5qpKusC1pkPeEgKDIQ");
         PushService.setDefaultPushCallback(this, MainActivity.class);
-        //ParseObject.registerSubclass(Employee.class);
+        ParseObject.registerSubclass(Employee.class);
         ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -44,7 +46,6 @@ public class ParsePushApplication extends Application {
                 }
             }
         });
-        Log.d("Start", "STY");
         ParseInstallation.getCurrentInstallation().saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e == null) {
@@ -55,7 +56,7 @@ public class ParsePushApplication extends Application {
             }
         });
 
-        Log.d("Start", "STYI");
+
 
 
        /*

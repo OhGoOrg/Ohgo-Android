@@ -4,40 +4,28 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Camera;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ohgo.ohgo.R;
-import com.ohgo.ohgo.activities.MainActivity;
 import com.ohgo.ohgo.activities.NewEmployeeActivity;
 import com.ohgo.ohgo.models.Employee;
-import com.ohgo.ohgo.models.User;
-import com.parse.GetDataCallback;
+import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseImageView;
+import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.util.Objects;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -133,13 +121,28 @@ public class AddWorkerFragment extends Fragment
             @Override
             public void onClick(View v) {
                 //Probar si X Campo esta vacio y si quiza deberia ser obligatorio
-                Employee employee = ((NewEmployeeActivity) getActivity()).getEmployee();
+                final Employee employee = ((NewEmployeeActivity) getActivity()).getEmployee();
 
                 employee.setName(name.getText().toString());
                 employee.setPassword(password.getText().toString());
                 employee.setBirth(birth.getText().toString());
                 employee.setEmail(mail.getText().toString());
                 employee.setPhone(phone.getText().toString());
+
+                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereEqualTo("username", "ohgo");
+                query.findInBackground( new FindCallback<ParseUser>() {
+                    @Override
+                    public void done(List<ParseUser> parseUsers, ParseException e) {
+                        ParseRelation parseRelation = employee.getRelation("userId");
+                        parseRelation.add(parseUsers.get(0));
+                        employee.saveInBackground();
+
+                    }
+                });
+
+
+
 
                 // Save the meal and return
                 employee.saveInBackground(new SaveCallback() {
