@@ -44,7 +44,10 @@ public class ParsePushApplication extends Application {
         Parse.initialize(this, "GbhsPA5Oh2yu2voFbxo45iJgFqPoJWd3kzZnqBZi", "diMBtwqe0Ysm0XXp2wb5fD5qpKusC1pkPeEgKDIQ");
         Log.e("Start", "STYI");
         PushService.setDefaultPushCallback(this, MainActivity.class);
+
         ParseInstallation.getCurrentInstallation().saveInBackground();
+
+
 
         // initialize the singleton
         sInstance = this;

@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -143,8 +144,10 @@ public class ServiceLocationFragment extends Fragment {
 
 
     public void setLocation(){
-        gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("USER"));
+
+        gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("Destiny").icon(BitmapDescriptorFactory.fromResource(R.drawable.ubicacion)));
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(service.getLatEnd(),service.getLonEnd()), 10));
+
 
     }
     @Override

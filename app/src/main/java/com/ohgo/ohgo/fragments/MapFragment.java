@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -101,9 +102,9 @@ public class MapFragment extends Fragment {
 
     public void setLocation()
     {
-
         if (service!=null)
         {
+
             service.setLatStart(40.717626);
             service.setLonStart(-73.997534);
             //double distance = 0.0;
@@ -133,8 +134,11 @@ public class MapFragment extends Fragment {
                 new GetRouteLocation(makeURL(loc.latitude,loc.longitude,service.getLatEnd(), service.getLonEnd())).execute();
             }
 
-            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatStart(), service.getLonStart()))).title("Employee"));
-            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("Customer"));
+            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatStart(), service.getLonStart()))).title("Employee")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubicacion)));
+            gMap.addMarker((new MarkerOptions().position(new LatLng(service.getLatEnd(), service.getLonEnd()))).title("Customer")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ubicacion)));
+
         }
     }
     @Override
